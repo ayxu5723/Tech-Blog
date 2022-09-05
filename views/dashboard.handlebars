@@ -1,13 +1,11 @@
-{{!-- Displays the blog posts of the user --}}
-<h1>Your Blog Posts</h1>
-<div class="blogPost">
-    <div class="container ">
-        <div class="row blogList">
-             
-        </div>
-    </div>
-</div>
-{{!-- Display the comments attched to the blog posts? --}}
+<h4>Hi, {{name}}!</h4>
+{{#if blogs.length}}
+<h5>You have made {{blogs.length}} posts.</h5>
+<p><a href="#blog-title">Click here to make another blog post</a></p>
+{{else}}
+<h5>You haven't made any posts. Make a new one below!</h5>
+{{/if}}
+
 {{!-- Create a new blog post --}}
 <div id="outsideCard"class="card text-center">
   <div class="card-body">
@@ -26,8 +24,27 @@
     <div id="blogSuccess"class="alert alert-success" role="alert">
         Your blog has been posted.
     </div>
-    <button class="btn btn-primary" id="create_blog_btn" type="submit">Save Blog</button>
-    <button class="btn btn-primary" id="access_blog_btn" type="submit">All My Blogs</button>
+    <button class="btn btn-primary" id="create_blog_btn" type="submit">Post Blog</button>
+  </div>
+
+{{!-- Displays the blog posts of the user --}}
+  {{#if blogs.length}}
+  <div class="col-md-6 blog-list">
+    <h3>Current Blog Posts:</h3>
+    {{#each blogs as |blog|}}
+      <div class="row mb-2">
+        <div class="col-md-8">
+          <h4><a href="/blog/{{blog.id}}">{{blog.title}}</a></h4>
+        </div>
+        <div class="col-md-4">
+          <button class="btn btn-sm btn-info" data-id="{{blog.id}}" id="updateBtn">Edit</button>
+          <button class="btn btn-sm btn-danger" data-id="{{blog.id}}" id="deleteBtn">DELETE</button>
+      </div>
+      </div>
+    {{/each}}
+  </div>
+  <script src="/js/editblog.js"></script>
+  {{/if}}
+
 </div>
 <script src="/js/blog.js"></script>
-<script src="/js/previousBlog.js"></script>

@@ -1,13 +1,26 @@
 {{!-- Displays the information of the selected blog post --}}
 <div class="text-center">
   <h2>{{title}}</h2>
-  <p>Created by {{user.name}} on {{format_date date_created}}</p>
+  <p>Posted by {{user.name}} on {{format_date date_created}}</p>
   <p>
     <span class="dollar-amount">{{content}}</span>
   </p>
   <p>
-    <button class="btn btn-primary">Fund this Project!</button>
+    <button class="btn btn-primary" id="createCommentBtn">Comment</button>
   </p>
 </div>
+<div class="text-center" id="newComment">
+  <ul class="list-group list-group-flush"> 
+    <div class="input-group input-group-lg">
+      <span class="input-group-text">Comment</span><br>
+      <textarea id="contentEntry" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div>
+  </ul>
+    <div id="commentSuccess" class="alert alert-success" role="alert">
+        Your comment has been added.
+    </div>
+    <button class="btn btn-primary" id="addCommentBtn" type="submit">Post Comment</button>
+</div>
+<script src="/js/comment.js"></script>
 {{!-- Post title, content, post creator's username, date created --}}
 {{!-- Allows the addition of comments --}}

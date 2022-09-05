@@ -22,24 +22,20 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.get('/login', (req, res) => {
-    // If the user is already logged in, redirect them to dashboard
-    if (req.session.logged_in) {
-      res.redirect('/dashboard');
-      return;
-    }
-  
-    res.render('login');
-});
-
 router.get('/blog/:id', async (req, res) => {
   try {
-    const blogData = await blog.findByPk(req.params.id, {
+    const blogData = await Blog.findByPk(req.params.id, {
       include: [
         {
           model: User,
           attributes: ['name'],
         },
+        {
+          model: Comment, include: {
+            model:User,
+            attributes: ['id', 'name']
+          }
+        }
       ],
     });
 
@@ -50,9 +46,35 @@ router.get('/blog/:id', async (req, res) => {
       logged_in: req.session.logged_in
     });
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json('err');
   }
 });
+
+// router.get('/comment/:id', async (req, res) => {
+//   try {
+//     const commentData = await Comment.findByPk(req.params.id, {
+//       include: [
+//         {
+//           model: User,
+//           attributes: ['name'],
+//         },
+//         {
+//           model: Blog,
+//           attributes: ['title'],
+//         },
+//       ],
+//     });
+
+//     const comment = commentData.get({ plain: true });
+
+//     res.render('comment', {
+//       ...comment,
+//       logged_in: req.session.logged_in
+//     });
+//   } catch (err) {
+//     res.status(500).json('err');
+//   }
+// });
 
 // Use withAuth middleware to prevent access to route
 router.get('/dashboard', withAuth, async (req, res) => {
@@ -73,16 +95,26 @@ router.get('/dashboard', withAuth, async (req, res) => {
   }
 });
 
-router.get('/blog', async (req, res) => {
-  try {
-    // Pass serialized data and session flag into template
-    res.render('blog', {
-      logged_in: true
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
+router.get('/login', (req, res) => {
+    // If the user is already logged in, redirect them to dashboard
+    if (req.session.logged_in) {
+      res.redirect('/dashboard');
+      return;
+    }
+  
+    res.render('login');
 });
+
+
+// router.get('/blog', async (req, res) => {
+//   try {
+//     res.render('blog', {
+//       logged_in: true
+//     });
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
 
 
 module.exports = router;
