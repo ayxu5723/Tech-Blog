@@ -130,10 +130,6 @@ header{
   background-color: aliceblue;
 }
 
-#newComment {
-  display: none;
-}
-
 #commentSuccess{
   display: none;
 }

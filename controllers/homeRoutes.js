@@ -30,11 +30,9 @@ router.get('/blog/:id', async (req, res) => {
           model: User,
           attributes: ['name'],
         },
-        {
-          model: Comment, include: {
-            model:User,
-            attributes: ['id', 'name']
-          }
+        { 
+          model: Comment,
+          include: [User],
         }
       ],
     });
@@ -50,31 +48,56 @@ router.get('/blog/:id', async (req, res) => {
   }
 });
 
-// router.get('/comment/:id', async (req, res) => {
-//   try {
-//     const commentData = await Comment.findByPk(req.params.id, {
-//       include: [
-//         {
-//           model: User,
-//           attributes: ['name'],
-//         },
-//         {
-//           model: Blog,
-//           attributes: ['title'],
-//         },
-//       ],
-//     });
+router.get('/comment/:id', async (req, res) => {
+  try {
+    const commentData = await Comment.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+          attributes: ['name'],
+        },
+        {
+          model: Blog,
+          attributes: ['title'],
+        },
+      ],
+    });
 
-//     const comment = commentData.get({ plain: true });
+    const comment = commentData.get({ plain: true });
 
-//     res.render('comment', {
-//       ...comment,
-//       logged_in: req.session.logged_in
-//     });
-//   } catch (err) {
-//     res.status(500).json('err');
-//   }
-// });
+    res.render('blog', {
+      ...comment,
+      logged_in: req.session.logged_in
+    });
+  } catch (err) {
+    res.status(500).json('err');
+  }
+});
+
+router.get('/blog/edit/:id', withAuth, async (req, res) => {
+  try {
+    const blogData = await Blog.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+          attributes: ['name'],
+        },
+        { model: Comment,
+          include: [User],
+         }
+      ],
+    });
+
+    const blog = blogData.get({ plain: true });
+
+    res.render('editBlog', {
+      ...blog,
+      logged_in: req.session.logged_in
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 // Use withAuth middleware to prevent access to route
 router.get('/dashboard', withAuth, async (req, res) => {
@@ -82,6 +105,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
     // Pass serialized data and session flag into template
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password']},
+      include: [{ model: Blog }],
     });
 
     const user = userData.get({ plain: true});

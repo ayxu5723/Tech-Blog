@@ -28,20 +28,20 @@ router.get('/', withAuth, async (req, res) => {
   }
 });
 
-// Get all blog data associated with user
-router.get('/user', async (req, res) => {
-  try{
-    const UserBlogData = await Blog.findAll({
-      include: [{ model: User}],
-        where:{
-          user_id: req.session.user_id
-        }
-    });
-    res.status(200).json(UserBlogData);
-  } catch(err) {
-    res.status(500).json(err);
-  }
-});
+// // Get all blog data associated with user
+// router.get('/user', async (req, res) => {
+//   try{
+//     const UserBlogData = await Blog.findAll({
+//       include: [{ model: User}],
+//         where:{
+//           user_id: req.session.user_id
+//         }
+//     });
+//     res.status(200).json(UserBlogData);
+//   } catch(err) {
+//     res.status(500).json(err);
+//   }
+// });
 
 router.post('/', withAuth, async (req, res) => {
   try {

@@ -1,39 +1,27 @@
-const createComment = async () => {
-  const commentbox = document.querySelector('#newComment')
+const addComment = async (event) => {
+  event.preventDefault();
+    const comment = document.querySelector('#newComment').value.trim();
+    const blogID = event.target.getAttribute('data-blog');
+    
+    const response = await fetch('/api/comment', {
+      method: 'POST',
+      body: JSON.stringify({
+      comment_content: comment,
+      blog_id: blogID
+    }),
+      headers: { 'Content-Type': 'application/json' },
+    });
+    if (response.ok) {
+      showSuccess();
+      content = '';
+    } else {
+    alert('Failed to post comment')};
+};
 
-  commentbox.style.display = 'contents';
-}
 
-const showSuccess = () => {
+const showSuccess = async () => {
   const successAlert = document.getElementById('commentSuccess');
   successAlert.style.display = 'block';
 }
 
-
-const addComment = async (event) => {
-  event.preventDefault();
-  if(event.target.hasAttribute('data-id')){
-    const content = document.querySelector('#contentEntry').value.trim();
-    const blogID = event.target.getAttribute('data-id');
-
-      if (content) {
-        const response = await fetch('/api/comment', {
-        method: 'POST',
-        body: JSON.stringify({
-        content,
-        blogID
-      }),
-        headers: { 'Content-Type': 'application/json' },
-      });
-      if (response.ok) {
-          showSuccess();
-          content = '';
-        } else {
-          alert(response.statusText)};
-    }
-  }
-};
-
-
-document.querySelector('#createCommentBtn').addEventListener('click', createComment);
-document.querySelector('#addCommentBtn').addEventListener('submit', addComment);
+document.querySelector('.comment-form').addEventListener('submit', addComment);

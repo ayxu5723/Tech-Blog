@@ -1,7 +1,6 @@
 <h4>Hi, {{name}}!</h4>
 {{#if blogs.length}}
 <h5>You have made {{blogs.length}} posts.</h5>
-<p><a href="#blog-title">Click here to make another blog post</a></p>
 {{else}}
 <h5>You haven't made any posts. Make a new one below!</h5>
 {{/if}}
@@ -31,19 +30,15 @@
   {{#if blogs.length}}
   <div class="col-md-6 blog-list">
     <h3>Current Blog Posts:</h3>
+    <h5>Click on a blog title if you wish to edit or delete it</h5>
     {{#each blogs as |blog|}}
       <div class="row mb-2">
         <div class="col-md-8">
-          <h4><a href="/blog/{{blog.id}}">{{blog.title}}</a></h4>
+          <h4><a href="/blog/edit/{{blog.id}}">{{blog.title}}</a></h4>
         </div>
-        <div class="col-md-4">
-          <button class="btn btn-sm btn-info" data-id="{{blog.id}}" id="updateBtn">Edit</button>
-          <button class="btn btn-sm btn-danger" data-id="{{blog.id}}" id="deleteBtn">DELETE</button>
-      </div>
       </div>
     {{/each}}
   </div>
-  <script src="/js/editblog.js"></script>
   {{/if}}
 
 </div>

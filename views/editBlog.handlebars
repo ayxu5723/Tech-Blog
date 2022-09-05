@@ -1,0 +1,15 @@
+<form class="form update-blog-form">
+  <div class="mb-3">
+    <label for="blog-name">Title:</label>
+    <input class="form-input" type="text" id="blog-name" name="blog-name" value="{{title}}" />
+  </div>
+  <div class="mb-3">
+    <label for="blog-desc">Content:</label>
+    <textarea class="form-input" id="blog-desc" name="blog-desc">{{content}}</textarea>
+  </div>
+    <button type="submit" class="btn btn-info" id='updateBtn' data-id="{{id}}">UPDATE</button>
+    <button class="btn btn-danger" id='delBtn' data-id="{{id}}">DELETE</button>
+</form>
+
+
+<script src="/js/editBlog.js"></script>

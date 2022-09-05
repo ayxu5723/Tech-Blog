@@ -9,7 +9,7 @@ const updateButtonHandler = async (event) => {
     if (response.ok) {
       document.location.replace('/dashboard');
     } else {
-      alert('Failed to delete project');
+      alert('Failed to update project');
     }
   }
 };
@@ -31,5 +31,5 @@ const delButtonHandler = async (event) => {
 };
 
 
-document.querySelector('#deleteBtn').addEventListener('click', delButtonHandler);
-document.querySelector('#updateBtn').addEventListener('click', delButtonHandler);
+document.querySelector('#delBtn').addEventListener('click', delButtonHandler);
+document.querySelector('#updateBtn').addEventListener('click', updateButtonHandler);
