@@ -3,8 +3,8 @@ const loginFormHandler = async (event) => {
   event.preventDefault();
   hideLoginAlert();
   // Collect values from the login form
-  const email = document.querySelector('#email-login').value.trim();
-  const password = document.querySelector('#password-login').value.trim();
+  const email = $('#email-login').value.trim();
+  const password = $('#password-login').value.trim();
 
   if (email && password) {
     // Send a POST request to the API endpoint
@@ -28,9 +28,9 @@ const signupFormHandler = async (event) => {
   event.preventDefault();
   hideSignUpAlert();
 
-  const name = document.querySelector('#name-signup').value.trim();
-  const email = document.querySelector('#email-signup').value.trim();
-  const password = document.querySelector('#password-signup').value.trim();
+  const name = $('#name-signup').value.trim();
+  const email = $('#email-signup').value.trim();
+  const password = $('#password-signup').value.trim();
 
   if(!name || !email || !password || password.length <8) {signUpAlert()}
 
@@ -52,8 +52,8 @@ const signupFormHandler = async (event) => {
 
 // Code that hides login and displays sign up
 const showSignup = () => {
-  const signup = document.getElementById('signupHidden');
-  const login = document.getElementById('loginHidden');
+  const signup = $('signupHidden');
+  const login = $('loginHidden');
 
   login.style.display = 'none';
   signup.style.display = 'contents';
@@ -61,52 +61,42 @@ const showSignup = () => {
 }
 // Code that hides signup and displays login
 const showLogin = () =>{
-  const signup = document.getElementById('signupHidden');
-  const login = document.getElementById('loginHidden');
+  const signup = $('signupHidden');
+  const login = $('loginHidden');
 
   login.style.display = 'contents';
   signup.style.display = 'none';
 }
 
-document
-  .querySelector('.login-form')
-  .addEventListener('submit', loginFormHandler);
+$('.login-form').addEventListener('submit', loginFormHandler);
 
-document
-  .querySelector('.signup-form')
-  .addEventListener('submit', signupFormHandler);
+$('.signup-form').addEventListener('submit', signupFormHandler);
 
 
-document
-  .querySelector('#signup-promptBtn')
-  .addEventListener('click', showSignup);
+$('#signup-promptBtn').addEventListener('click', showSignup);
 
-document
-  .querySelector('#signup-promptBtn2')
-  .addEventListener('click', showSignup);
+$('#signup-promptBtn2').addEventListener('click', showSignup);
 
-document
-  .querySelector('#login-promptBtn')
-  .addEventListener('click', showLogin);
+$('#login-promptBtn').addEventListener('click', showLogin);
 
 // Errors that display if user input criteria are not met
 const signUpAlert = () => {
-  const signUpAlert = document.querySelector('#signUpAlert');
+  const signUpAlert = $('#signUpAlert');
   signUpAlert.style.display = 'block';
 }
 
 const hideSignUpAlert = () => {
-  const signUpAlert = document.querySelector('#signUpAlert');
+  const signUpAlert = $('#signUpAlert');
   signUpAlert.style.display = 'none';
 }
 
 const loginAlert = () => {
-  const loginAlert = document.querySelector('#loginAlert');
+  const loginAlert = $('#loginAlert');
   loginAlert.style.display = 'block';
 }
 
 const hideLoginAlert = () => {
-  const loginAlert = document.querySelector('#loginAlert');
+  const loginAlert = $('#loginAlert');
   loginAlert.style.display = 'none';
 }
 

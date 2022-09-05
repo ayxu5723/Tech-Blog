@@ -5,7 +5,9 @@ const withAuth = require('../../utils/auth');
 router.post('/', withAuth, async (req, res) => {
   try {
     const newBlog = await Blog.create({
-      ...req.body,
+      date_created:req.body.date_created,
+      title: req.body.title,
+      content: req.body.content,
       user_id: req.session.user_id,
     });
 
@@ -18,7 +20,9 @@ router.post('/', withAuth, async (req, res) => {
 router.put('/:id', withAuth, async (req, res) => {
   try {
     const blogData = await Blog.update({
-      ...req.body,
+      date_created:req.body.date_created,
+      title: req.body.title,
+      content: req.body.content,
       user_id: req.session.user_id,
     });
 

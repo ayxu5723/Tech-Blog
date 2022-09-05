@@ -1,0 +1,25 @@
+header{
+  background-color: rgb(18, 18, 120);
+}
+
+.homebutton{
+  color: white;
+  font-family:'Fantasy';
+}
+
+.navbar{
+  margin-bottom: 0px;
+}
+
+.blog{
+  border: solid 1px;
+}
+
+#blogTitle{
+  background-color: cadetblue;
+  border: solid 1 px;
+}
+
+#signupHidden{
+  display: none;
+}

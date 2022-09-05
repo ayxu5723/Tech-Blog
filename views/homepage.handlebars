@@ -1,2 +1,17 @@
 {{!-- Display all blog posts --}}
-{{!-- Include title and date created --}}
+{{#each blogs as |blog| }}
+<div class="row mb-4 blog">
+  <div class="col-10" id="blogTitle">
+    <h2>
+      <a id='titleDisplay' href="/blog/{{blog.id}}">{{blog.title}}</a>
+    </h2>
+    <p>Created by {{blog.user.name}} on {{format_date blog.date_created}}</p>
+  </div>
+  <div class="col-10" id="blogContent">
+    <p>
+      {{blog.content}}
+    </p>
+  </div>
+</div>
+{{/each}}
+<script src="/js/blog.js"></script>
