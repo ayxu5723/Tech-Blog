@@ -24,6 +24,6 @@ const createBlog = async () => {
 document.querySelector('#create_blog_btn').addEventListener('click', createBlog);
 
 const showSuccess = () => {
-  const successAlert = $('blogSuccess');
+  const successAlert = document.querySelector('#blogSuccess');
   successAlert.style.display = 'block';
 }
