@@ -52,8 +52,8 @@ const signupFormHandler = async (event) => {
 
 // Code that hides login and displays sign up
 const showSignup = () => {
-  const signup = document.querySelector('signupHidden');
-  const login = document.querySelector('loginHidden');
+  const signup = document.querySelector('#signupHidden');
+  const login = document.querySelector('#loginHidden');
 
   login.style.display = 'none';
   signup.style.display = 'contents';
@@ -61,8 +61,8 @@ const showSignup = () => {
 }
 // Code that hides signup and displays login
 const showLogin = () =>{
-  const signup = document.querySelector('signupHidden');
-  const login = document.querySelector('loginHidden');
+  const signup = document.querySelector('#signupHidden');
+  const login = document.querySelector('#loginHidden');
 
   login.style.display = 'contents';
   signup.style.display = 'none';
